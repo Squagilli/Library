@@ -6,7 +6,7 @@ const libContainer = document.querySelector('.library-container');
 const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
-const removeBookButton = document.querySelector('.remove-book')
+
 
 
 
@@ -24,6 +24,7 @@ function Book(title, author, pages, read) {
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this); 
+    console.log(theLibrary.indexOf(this));
 }
 
 // Removes book from library
@@ -31,6 +32,7 @@ Book.prototype.removeSelf = function() {
     const newLibrary = theLibrary.filter(book => book.title !== this.title);
     theLibrary = newLibrary;
     console.log(theLibrary);
+    
 }
 
 // Displays the library on cards
@@ -176,6 +178,12 @@ createBookButton.addEventListener('click', addBook);
 cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
+cooking.removeSelf();
 displayLib();
-cruggus.removeSelf();
 console.log(theLibrary);
+
+
+const deleteBook = document.querySelector('.remove-book');
+deleteBook.onclick = function() {
+    this.removeSelf();
+}
