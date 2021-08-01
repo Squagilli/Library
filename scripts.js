@@ -7,10 +7,10 @@ const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
 
-// The library itself
+// Initiates library as an empty array
 let theLibrary = [];
 
-// Book Constructor
+// Book Constructor creates the prototype for book objects
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -20,25 +20,25 @@ function Book(title, author, pages, read) {
 
 // Adds book to library
 Book.prototype.addToLib = function() {
-    theLibrary.push(this);
+    theLibrary.push(this); // adds book to array
 
 }
 
 // Displays the library on cards
 function displayLib() {
-            theLibrary.forEach(function(theLibrary) {
+            theLibrary.forEach(function(theLibrary) { // for each 
             
             console.table(theLibrary)
-            item = document.createElement('div');
-            bookTitle = document.createElement('h4');
-            bookAuthor = document.createElement('h4');
-            bookPages = document.createElement('h4');
-            bookRead = document.createElement('h4');
+            item = document.createElement('div'); // create book item
+            bookTitle = document.createElement('h4'); // create heading for title
+            bookAuthor = document.createElement('h4'); // create heading for author
+            bookPages = document.createElement('h4'); // create heading for pages
+            bookRead = document.createElement('h4'); // create heading for read
             
-            item.classList.add('item');
-            bookTitle.textContent = `'${theLibrary.title}'`
-            bookAuthor.textContent = theLibrary.author
-            bookPages.textContent = `${theLibrary.pages} pages`
+            item.classList.add('item'); // add the item class to book item
+            bookTitle.textContent = `'${theLibrary.title}'` // adds titles to title heading
+            bookAuthor.textContent = theLibrary.author // adds author to author heading
+            bookPages.textContent = `${theLibrary.pages} pages` // adds pages to page heading
     
                 if (theLibrary.read === true) {
                     bookRead.textContent = 'Has been read';
@@ -47,12 +47,12 @@ function displayLib() {
                     bookRead.textContent = 'Has not been read';
                 }
             
-                item.appendChild(bookTitle);
-                item.appendChild(bookAuthor);
-                item.appendChild(bookPages);
-                item.appendChild(bookRead);
+                item.appendChild(bookTitle); // appends book title to book object
+                item.appendChild(bookAuthor); // appends author to book object
+                item.appendChild(bookPages); // appends pages to book object
+                item.appendChild(bookRead); // appends read to book object
             
-                libContainer.append(item);
+                libContainer.append(item); // appends book object to library container
     });
 };
 
@@ -110,7 +110,7 @@ const addBook = (e) => {
     e.preventDefault();
     const newBook = createBook();
     newBook.addToLib();
-    updateLibrary();
+    updateLibrary(newBook);
 
 
     console.log(newBook)
@@ -119,8 +119,7 @@ const addBook = (e) => {
     
 }
 
-function updateLibrary() {
-    console.table()
+function updateLibrary(newBook) {
             item = document.createElement('div');
             bookTitle = document.createElement('h4');
             bookAuthor = document.createElement('h4');
@@ -128,9 +127,9 @@ function updateLibrary() {
             bookRead = document.createElement('h4');
             
             item.classList.add('item');
-            bookTitle.textContent = `'${theLibrary.title}'`
-            bookAuthor.textContent = theLibrary.author
-            bookPages.textContent = `${theLibrary.pages} pages`
+            bookTitle.textContent = `'${newBook.title}'`
+            bookAuthor.textContent = newBook.author
+            bookPages.textContent = `${newBook.pages} pages`
     
                 if (theLibrary.read === true) {
                     bookRead.textContent = 'Has been read';
@@ -145,9 +144,12 @@ function updateLibrary() {
                 item.appendChild(bookRead);
             
                 libContainer.append(item);
+
+                console.log(theLibrary);
 }
 
 createBookButton.addEventListener('click', addBook);
+
 
 
 // displayLib();
@@ -155,3 +157,4 @@ cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
 displayLib();
+console.log(theLibrary);
