@@ -5,6 +5,7 @@ const newBookButton = document.querySelector('.new-book');
 const libContainer = document.querySelector('.library-container');
 const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
+const createBookButton = document.querySelector('.create-book');
 
 
 
@@ -27,16 +28,31 @@ Book.prototype.addToLib = function() {
 
 
 
+
+
 // Displays the library on cards
 function displayLib() {
     theLibrary.forEach(function(theLibrary) {
         console.table(theLibrary)
         item = document.createElement('div');
-        item.classList.add('item');
+        bookTitle = document.createElement('h4');
+        bookAuthor = document.createElement('h4');
+        bookPages = document.createElement('h4');
+        bookRead = document.createElement('h4');
 
-        
-        item.innerHTML = theLibrary.title + ' ' + theLibrary.author + ' ' + theLibrary.pages + ' ' + theLibrary.read;
-        
+
+        item.classList.add('item');
+        bookTitle.textContent = `'${theLibrary.title}'`
+        bookAuthor.textContent = theLibrary.author
+        bookPages.textContent = `${theLibrary.pages} pages`
+        bookRead.textContent = theLibrary.read
+
+        item.appendChild(bookTitle);
+        item.appendChild(bookAuthor);
+        item.appendChild(bookPages);
+        item.appendChild(bookRead);
+
+    
         libContainer.append(item);
     });
 }
@@ -64,14 +80,15 @@ const cooking = new Book(
 
 
 // testing 
-console.log(cruggus);
+/*console.log(cruggus);
 cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
 console.table(theLibrary);
 
-// displayLib();
-displayLib();
+console.log(cruggus.inLibrary)*/
+
+
 
 
 // Event listeners 
@@ -86,3 +103,33 @@ window.onclick = function(e) {
         newBookForm.style.display = 'none';
     }
 }
+
+
+
+const createBook = () => {
+    const title = document.getElementById('title').value;
+    const author = document.getElementById('author').value;
+    const pages = document.getElementById('pages').value;
+    const read = document.getElementById('read').value;
+    return new Book(title, author, pages, read);
+    
+}
+
+const addBook = (e) => {
+    e.preventDefault();
+    const newBook = createBook();
+    newBook.addToLib();
+    displayLib();
+
+    console.log(newBook)
+    newBookForm.style.display = 'none';
+    
+    
+}
+
+createBookButton.addEventListener('click', addBook)
+
+
+
+// displayLib();
+displayLib();
