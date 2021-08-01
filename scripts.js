@@ -1,6 +1,14 @@
 
 // HTML selectors
-bookItem = document.querySelector('.book-item');
+const bookItem = document.querySelector('.book-item');
+const newBookButton = document.querySelector('.new-book');
+const libContainer = document.querySelector('.library-container');
+
+const newBookForm = document.querySelector('.form-container');
+const span = document.getElementsByClassName('close')[0];
+
+
+
 
 // The library itself
 let theLibrary = [];
@@ -60,3 +68,19 @@ cooking.addToLib();
 console.table(theLibrary);
 
 displayLib();
+
+function popBookForm() {
+ 
+}
+
+newBookButton.onclick = function() {
+    newBookForm.style.display = 'block';
+}
+span.onclick = function() {
+    newBookForm.style.display = 'none';
+}
+window.onclick = function(e) {
+    if (e.target == newBookForm) {
+        newBookForm.style.display = 'none';
+    }
+}
