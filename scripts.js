@@ -25,15 +25,19 @@ Book.prototype.addToLib = function() {
     theLibrary.push(this)
 }
 
+
+
 // Displays the library on cards
 function displayLib() {
     theLibrary.forEach(function(theLibrary) {
         console.table(theLibrary)
         item = document.createElement('div');
-        item.classList.add('.item');
+        item.classList.add('item');
+
         
-        item.innerHTML = [theLibrary.title, theLibrary.author, theLibrary.pages, theLibrary.read];
-        bookItem.append(item);
+        item.innerHTML = theLibrary.title + ' ' + theLibrary.author + ' ' + theLibrary.pages + ' ' + theLibrary.read;
+        
+        libContainer.append(item);
     });
 }
 
@@ -66,6 +70,7 @@ ether.addToLib();
 cooking.addToLib();
 console.table(theLibrary);
 
+// displayLib();
 displayLib();
 
 
