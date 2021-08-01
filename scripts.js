@@ -6,6 +6,9 @@ const libContainer = document.querySelector('.library-container');
 const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
+const removeBookButton = document.querySelector('.remove-book')
+
+
 
 // Initiates library as an empty array
 let theLibrary = [];
@@ -21,7 +24,13 @@ function Book(title, author, pages, read) {
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this); 
+}
 
+// Removes book from library
+Book.prototype.removeSelf = function() {
+    const newLibrary = theLibrary.filter(book => book.title !== this.title);
+    theLibrary = newLibrary;
+    console.log(theLibrary);
 }
 
 // Displays the library on cards
@@ -34,8 +43,11 @@ function displayLib() {
             bookAuthor = document.createElement('h4'); 
             bookPages = document.createElement('h4'); 
             bookRead = document.createElement('h4'); 
-            
+            toggleRemove = document.createElement('button');
+
+            toggleRemove.classList.add('remove-book');
             item.classList.add('item'); 
+
             bookTitle.textContent = `'${theLibrary.title}'` 
             bookAuthor.textContent = `by ${theLibrary.author}`
             bookPages.textContent = `${theLibrary.pages} pages` 
@@ -46,11 +58,13 @@ function displayLib() {
                 else {
                     bookRead.textContent = 'Has not been read';
                 }
+            toggleRemove.textContent = 'Remove Book'
             
                 item.appendChild(bookTitle); 
                 item.appendChild(bookAuthor); 
                 item.appendChild(bookPages);
                 item.appendChild(bookRead); 
+                item.appendChild(toggleRemove);
             
                 libContainer.append(item); 
     });
@@ -109,8 +123,11 @@ function updateLibrary(newBook) {
             bookAuthor = document.createElement('h4');
             bookPages = document.createElement('h4');
             bookRead = document.createElement('h4');
-            
+            toggleRemove = document.createElement('button');
+
+            toggleRemove.classList.add('remove-book');
             item.classList.add('item');
+
             bookTitle.textContent = `'${newBook.title}'`
             bookAuthor.textContent = `by ${newBook.author}`
             bookPages.textContent = `${newBook.pages} pages`
@@ -121,16 +138,20 @@ function updateLibrary(newBook) {
                 else {
                     bookRead.textContent = 'Has not been read';
                 }
+            toggleRemove.textContent = 'Remove Book'
             
                 item.appendChild(bookTitle);
                 item.appendChild(bookAuthor);
                 item.appendChild(bookPages);
                 item.appendChild(bookRead);
+                item.appendChild(toggleRemove);
             
                 libContainer.append(item);
 
                 console.log(theLibrary);
 }
+
+
 
 
 // Event listeners 
@@ -145,7 +166,9 @@ window.onclick = function(e) {
         newBookForm.style.display = 'none';
     }
 }
+
 createBookButton.addEventListener('click', addBook);
+
 
 
 
@@ -154,4 +177,5 @@ cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
 displayLib();
+cruggus.removeSelf();
 console.log(theLibrary);
