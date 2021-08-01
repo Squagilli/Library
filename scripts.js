@@ -1,5 +1,11 @@
+
+// HTML selectors
+bookItem = document.querySelector('.book-item');
+
+// The library itself
 let theLibrary = [];
 
+// Book Constructor
 function Book(title, author, pages, read) {
     this.title = title
     this.author = author
@@ -7,15 +13,24 @@ function Book(title, author, pages, read) {
     this.read = read
 }
 
+// Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this)
 }
-Book.prototype.showLib = function() {
-    for (let property in this) {
-        console.log(`${property}: ${this[property]}`);
-    }
+
+// Displays the library on cards
+function displayLib() {
+    theLibrary.forEach(function(theLibrary) {
+        console.table(theLibrary)
+        item = document.createElement('div');
+        item.classList.add('.item');
+        
+        item.innerHTML = [theLibrary.title, theLibrary.author, theLibrary.pages, theLibrary.read];
+        bookItem.append(item);
+    });
 }
 
+// Example books
 const cruggus = new Book(
     'Cruggus',
     'The Crug',
@@ -37,11 +52,11 @@ const cooking = new Book(
 
 
 
-
+// testing 
 console.log(cruggus);
 cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
 console.table(theLibrary);
 
-ether.showLib();
+displayLib();
