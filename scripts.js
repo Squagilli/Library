@@ -178,7 +178,6 @@ createBookButton.addEventListener('click', addBook);
 cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
-cooking.removeSelf();
 displayLib();
 console.log(theLibrary);
 
