@@ -3,7 +3,6 @@
 const bookItem = document.querySelector('.book-item');
 const newBookButton = document.querySelector('.new-book');
 const libContainer = document.querySelector('.library-container');
-
 const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 
@@ -69,10 +68,8 @@ console.table(theLibrary);
 
 displayLib();
 
-function popBookForm() {
- 
-}
 
+// Event listeners 
 newBookButton.onclick = function() {
     newBookForm.style.display = 'block';
 }
