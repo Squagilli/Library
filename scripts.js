@@ -27,9 +27,10 @@ Book.prototype.addToLib = function() {
 }
 
 // Removes book from library
-Book.prototype.removeSelf = function() {
-    const newLibrary = theLibrary.filter(book => book.title !== this.title);
-    theLibrary = newLibrary;
+function removeBook(goneBook) {
+    const newLib = theLibrary.filter(book => book.title !== goneBook.id);
+    theLibrary = newLib;
+    console.table(theLibrary);
 }
 
 
@@ -78,9 +79,12 @@ function showLib() {
 
                 
                 toggleRemove.onclick = function(e) {
-                console.log(e.target);
+                console.log(e.target.parentNode);
                 deleteThis = e.target.parentNode;
+
+                
                 deleteThis.remove();
+                removeBook(deleteThis);
                 }
 
 
@@ -124,7 +128,6 @@ const createBook = () => {
 const addBook = (e) => {
     e.preventDefault();
     let newBook = createBook();
-    //newBook.addToLib();
     updateLibrary(newBook);
 
     newBook = `${newBook.title}`;
@@ -177,6 +180,7 @@ function updateLibrary(newBook) {
             console.log(e.target);
             deleteThis = e.target.parentNode;
             deleteThis.remove();
+            removeBook(deleteThis);
             }
 
         }
