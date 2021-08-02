@@ -8,8 +8,6 @@ const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
 
 
-
-
 // Initiates library as an empty array
 let theLibrary = [];
 
@@ -24,7 +22,8 @@ function Book(title, author, pages, read) {
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this); 
-    console.log(theLibrary.indexOf(this));
+    this.numnum = theLibrary.indexOf(this);
+    console.log(this.numnum);
 }
 
 // Removes book from library
@@ -35,26 +34,34 @@ Book.prototype.removeSelf = function() {
     
 }
 
+// Adds an element associated with this object
+Book.prototype.addRemoveButton = function() {
+    toggleRemove = document.createElement('button');
+}
+
 // Displays the library on cards
-function displayLib() {
-            theLibrary.forEach(function(theLibrary) { 
+function showLib() {
+    for (let i = 0; i < theLibrary.length; i++) {
             
-            console.table(theLibrary)
             item = document.createElement('div'); 
             bookTitle = document.createElement('h4'); 
             bookAuthor = document.createElement('h4'); 
             bookPages = document.createElement('h4'); 
             bookRead = document.createElement('h4'); 
             toggleRemove = document.createElement('button');
+            
 
-            toggleRemove.classList.add('remove-book');
-            item.classList.add('item'); 
+            
+            item.classList.add('item');
+            
+            toggleRemove.setAttribute('id', `${theLibrary[i].title}`);
 
-            bookTitle.textContent = `'${theLibrary.title}'` 
-            bookAuthor.textContent = `by ${theLibrary.author}`
-            bookPages.textContent = `${theLibrary.pages} pages` 
+
+            bookTitle.textContent = `'${theLibrary[i].title}'` 
+            bookAuthor.textContent = `by ${theLibrary[i].author}`
+            bookPages.textContent = `${theLibrary[i].pages} pages` 
     
-                if (theLibrary.read === true) {
+                if (theLibrary[i].read === true) {
                     bookRead.textContent = 'Has been read';
                 }
                 else {
@@ -69,8 +76,13 @@ function displayLib() {
                 item.appendChild(toggleRemove);
             
                 libContainer.append(item); 
-    });
-};
+
+
+
+                
+                
+    }
+}
 
 
 // Example books
@@ -107,12 +119,13 @@ const createBook = () => {
 // adds new book to library
 const addBook = (e) => {
     e.preventDefault();
-    const newBook = createBook();
+    let newBook = createBook();
     newBook.addToLib();
     updateLibrary(newBook);
 
-
-    console.log(newBook)
+    newBook = `${newBook.title}`;
+    console.log(newBook);
+    
     newBookForm.style.display = 'none';
     
     
@@ -120,38 +133,44 @@ const addBook = (e) => {
 
 // updates library display with new book
 function updateLibrary(newBook) {
-            item = document.createElement('div');
-            bookTitle = document.createElement('h4');
-            bookAuthor = document.createElement('h4');
-            bookPages = document.createElement('h4');
-            bookRead = document.createElement('h4');
-            toggleRemove = document.createElement('button');
+        if (newBook.title !== this.title) {
+        item = document.createElement('div');
+        bookTitle = document.createElement('h4');
+        bookAuthor = document.createElement('h4');
+        bookPages = document.createElement('h4');
+        bookRead = document.createElement('h4');
+        toggleRemove = document.createElement('button');
 
-            toggleRemove.classList.add('remove-book');
-            item.classList.add('item');
+        toggleRemove.setAttribute('id', `${newBook.title}`);
+        item.classList.add('item');
 
-            bookTitle.textContent = `'${newBook.title}'`
-            bookAuthor.textContent = `by ${newBook.author}`
-            bookPages.textContent = `${newBook.pages} pages`
-    
-                if (theLibrary.read === true) {
-                    bookRead.textContent = 'Has been read';
-                }
-                else {
-                    bookRead.textContent = 'Has not been read';
-                }
-            toggleRemove.textContent = 'Remove Book'
-            
-                item.appendChild(bookTitle);
-                item.appendChild(bookAuthor);
-                item.appendChild(bookPages);
-                item.appendChild(bookRead);
-                item.appendChild(toggleRemove);
-            
-                libContainer.append(item);
+        bookTitle.textContent = `'${newBook.title}'`
+        bookAuthor.textContent = `by ${newBook.author}`
+        bookPages.textContent = `${newBook.pages} pages`
 
-                console.log(theLibrary);
+            if (theLibrary.read === true) {
+                bookRead.textContent = 'Has been read';
+            }
+            else {
+                bookRead.textContent = 'Has not been read';
+            }
+        toggleRemove.textContent = 'Remove Book'
+        
+            item.appendChild(bookTitle);
+            item.appendChild(bookAuthor);
+            item.appendChild(bookPages);
+            item.appendChild(bookRead);
+            item.appendChild(toggleRemove);
+        
+            libContainer.append(item);
+
+            console.log(theLibrary);
+        }
+        else return;
+        
 }
+         
+
 
 
 
@@ -169,8 +188,10 @@ window.onclick = function(e) {
     }
 }
 
-createBookButton.addEventListener('click', addBook);
 
+
+
+createBookButton.addEventListener('click', addBook);
 
 
 
@@ -178,11 +199,12 @@ createBookButton.addEventListener('click', addBook);
 cruggus.addToLib();
 ether.addToLib();
 cooking.addToLib();
-displayLib();
+cruggus.addRemoveButton();
+showLib();
 console.log(theLibrary);
 
+console.log(cooking.numnum);
 
-const deleteBook = document.querySelector('.remove-book');
-deleteBook.onclick = function() {
-    this.removeSelf();
-}
+
+
+
