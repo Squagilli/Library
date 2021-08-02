@@ -155,7 +155,7 @@ function updateLibrary(newBook) {
         bookAuthor.textContent = `by ${newBook.author}`
         bookPages.textContent = `${newBook.pages} pages`
 
-            if (theLibrary.read === true) {
+            if (newBook.read === true) {
                 bookRead.textContent = 'Has been read';
             }
             else {
