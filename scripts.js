@@ -7,7 +7,6 @@ const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
 
-
 // Initiates library as an empty array
 let theLibrary = [];
 
@@ -30,7 +29,9 @@ Book.prototype.addToLib = function() {
 Book.prototype.removeSelf = function() {
     const newLibrary = theLibrary.filter(book => book.title !== this.title);
     theLibrary = newLibrary;
-    console.log(theLibrary);
+    console.log(removeName);
+    console.log(toggleRemove);
+    
     
 }
 
@@ -42,7 +43,7 @@ Book.prototype.addRemoveButton = function() {
 // Displays the library on cards
 function showLib() {
     for (let i = 0; i < theLibrary.length; i++) {
-            
+
             item = document.createElement('div'); 
             bookTitle = document.createElement('h4'); 
             bookAuthor = document.createElement('h4'); 
@@ -50,13 +51,13 @@ function showLib() {
             bookRead = document.createElement('h4'); 
             toggleRemove = document.createElement('button');
             
-
-            
             item.classList.add('item');
             
             toggleRemove.setAttribute('id', `${theLibrary[i].title}`);
+            item.setAttribute('id', `${theLibrary[i].title}`);
+            removeName = document.querySelector(`#${theLibrary[i].title}`);
 
-
+            
             bookTitle.textContent = `'${theLibrary[i].title}'` 
             bookAuthor.textContent = `by ${theLibrary[i].author}`
             bookPages.textContent = `${theLibrary[i].pages} pages` 
@@ -74,12 +75,10 @@ function showLib() {
                 item.appendChild(bookPages);
                 item.appendChild(bookRead); 
                 item.appendChild(toggleRemove);
+
             
                 libContainer.append(item); 
-
-
-
-                
+    
                 
     }
 }
@@ -144,6 +143,8 @@ function updateLibrary(newBook) {
         toggleRemove.setAttribute('id', `${newBook.title}`);
         item.classList.add('item');
 
+        item.setAttribute('id', `${newBook.title}`);
+
         bookTitle.textContent = `'${newBook.title}'`
         bookAuthor.textContent = `by ${newBook.author}`
         bookPages.textContent = `${newBook.pages} pages`
@@ -165,6 +166,14 @@ function updateLibrary(newBook) {
             libContainer.append(item);
 
             console.log(theLibrary);
+
+
+        toggleRemove.onclick = function() {
+            removedBook = document.getElementById(`${newBook.title}`);
+            console.log(removedBook);
+            removedBook.remove();
+        }
+
         }
         else return;
         
@@ -187,7 +196,6 @@ window.onclick = function(e) {
         newBookForm.style.display = 'none';
     }
 }
-
 
 
 
