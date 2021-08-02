@@ -78,6 +78,12 @@ function showLib() {
 
             
                 libContainer.append(item); 
+
+                toggleRemove.onclick = function() {
+                    removedBook = document.getElementById(`${theLibrary[i].title}`);
+                    console.log(removedBook);
+                    removedBook.remove();
+                }
     
                 
     }
