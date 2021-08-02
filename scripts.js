@@ -7,6 +7,8 @@ const newBookForm = document.querySelector('.form-container');
 const span = document.getElementsByClassName('close')[0];
 const createBookButton = document.querySelector('.create-book');
 
+
+
 // Initiates library as an empty array
 let theLibrary = [];
 
@@ -16,29 +18,22 @@ function Book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.read = read
+    this.addToLib();
 }
 
 // Adds book to library
 Book.prototype.addToLib = function() {
-    theLibrary.push(this); 
-    this.numnum = theLibrary.indexOf(this);
-    console.log(this.numnum);
+    theLibrary.push(this);
 }
 
 // Removes book from library
 Book.prototype.removeSelf = function() {
     const newLibrary = theLibrary.filter(book => book.title !== this.title);
     theLibrary = newLibrary;
-    console.log(removeName);
-    console.log(toggleRemove);
-    
-    
 }
 
-// Adds an element associated with this object
-Book.prototype.addRemoveButton = function() {
-    toggleRemove = document.createElement('button');
-}
+
+
 
 // Displays the library on cards
 function showLib() {
@@ -53,7 +48,9 @@ function showLib() {
             
             item.classList.add('item');
             
+            // add id's to items and buttons to associate with DOM
             toggleRemove.setAttribute('id', `${theLibrary[i].title}`);
+            toggleRemove.classList.add('removeBtn');
             item.setAttribute('id', `${theLibrary[i].title}`);
             removeName = document.querySelector(`#${theLibrary[i].title}`);
 
@@ -68,7 +65,8 @@ function showLib() {
                 else {
                     bookRead.textContent = 'Has not been read';
                 }
-            toggleRemove.textContent = 'Remove Book'
+
+            toggleRemove.textContent = 'Remove Book';
             
                 item.appendChild(bookTitle); 
                 item.appendChild(bookAuthor); 
@@ -76,15 +74,16 @@ function showLib() {
                 item.appendChild(bookRead); 
                 item.appendChild(toggleRemove);
 
-            
                 libContainer.append(item); 
 
-                toggleRemove.onclick = function() {
-                    removedBook = document.getElementById(`${theLibrary[i].title}`);
-                    console.log(removedBook);
-                    removedBook.remove();
+                
+                toggleRemove.onclick = function(e) {
+                console.log(e.target);
+                deleteThis = e.target.parentNode;
+                deleteThis.remove();
                 }
-    
+
+
                 
     }
 }
@@ -111,7 +110,7 @@ const cooking = new Book(
 )
 
 
-// creates a new book 
+// creates a new book object
 const createBook = () => {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
@@ -125,15 +124,13 @@ const createBook = () => {
 const addBook = (e) => {
     e.preventDefault();
     let newBook = createBook();
-    newBook.addToLib();
+    //newBook.addToLib();
     updateLibrary(newBook);
 
     newBook = `${newBook.title}`;
     console.log(newBook);
     
     newBookForm.style.display = 'none';
-    
-    
 }
 
 // updates library display with new book
@@ -161,6 +158,7 @@ function updateLibrary(newBook) {
             else {
                 bookRead.textContent = 'Has not been read';
             }
+
         toggleRemove.textContent = 'Remove Book'
         
             item.appendChild(bookTitle);
@@ -171,23 +169,22 @@ function updateLibrary(newBook) {
         
             libContainer.append(item);
 
-            console.log(theLibrary);
+            console.table(theLibrary);
 
 
-        toggleRemove.onclick = function() {
-            removedBook = document.getElementById(`${newBook.title}`);
-            console.log(removedBook);
-            removedBook.remove();
+
+        toggleRemove.onclick = function(e) {
+            console.log(e.target);
+            deleteThis = e.target.parentNode;
+            deleteThis.remove();
+            }
+
         }
 
-        }
         else return;
         
 }
          
-
-
-
 
 
 // Event listeners 
@@ -207,17 +204,18 @@ window.onclick = function(e) {
 
 createBookButton.addEventListener('click', addBook);
 
-
-
-// displayLib();
-cruggus.addToLib();
-ether.addToLib();
-cooking.addToLib();
-cruggus.addRemoveButton();
+//cruggus.addToLib();
+//ether.addToLib();
+//cooking.addToLib();
 showLib();
-console.log(theLibrary);
+console.table(theLibrary);
 
-console.log(cooking.numnum);
+
+
+
+
+
+
 
 
 
