@@ -19,11 +19,21 @@ function Book(title, author, pages, read) {
     this.pages = pages
     this.read = read
     this.addToLib();
+    
 }
 
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this);
+    this.addToStorage();
+}
+
+// Adds book to local storage
+Book.prototype.addToStorage =  function() {
+    let myLibrary = JSON.stringify(theLibrary);
+    localStorage.setItem('library', myLibrary);
+    let myLibraryNormal = JSON.parse(localStorage.getItem('library'));
+    console.log(myLibraryNormal);
 }
 
 // Removes book from library
@@ -134,6 +144,8 @@ const addBook = (e) => {
     console.log(newBook);
     
     newBookForm.style.display = 'none';
+
+    
 }
 
 // updates library display with new book
