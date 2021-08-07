@@ -44,10 +44,10 @@ function removeBook(goneBook) {
 function showLib() {
     for (let i = 0; i < theLibrary.length; i++) {
 
-            let library = JSON.parse(localStorage.getItem('library'));
-            console.log(library);
 
-            theLibrary = library;
+            //let library = JSON.parse(localStorage.getItem('library'));
+            //theLibrary = library;
+            
 
             item = document.createElement('div'); 
             bookTitle = document.createElement('h4'); 
@@ -196,6 +196,7 @@ function updateLibrary(newBook) {
             deleteThis = e.target.parentNode;
             deleteThis.remove();
             removeBook(deleteThis);
+
             }
 
         }
@@ -223,9 +224,6 @@ window.onclick = function(e) {
 
 createBookButton.addEventListener('click', addBook);
 
-//cruggus.addToLib();
-//ether.addToLib();
-//cooking.addToLib();
 
 window.localStorage;
 showLib();
