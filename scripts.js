@@ -25,16 +25,10 @@ function Book(title, author, pages, read) {
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this);
-    this.addToStorage();
 }
 
 // Adds book to local storage
-Book.prototype.addToStorage =  function() {
-    let myLibrary = JSON.stringify(theLibrary);
-    localStorage.setItem('library', myLibrary);
-    let myLibraryNormal = JSON.parse(localStorage.getItem('library'));
-    console.log(myLibraryNormal);
-}
+
 
 // Removes book from library
 function removeBook(goneBook) {
@@ -49,6 +43,11 @@ function removeBook(goneBook) {
 // Displays the library on cards
 function showLib() {
     for (let i = 0; i < theLibrary.length; i++) {
+
+            let library = JSON.parse(localStorage.getItem('library'));
+            console.log(library);
+
+            theLibrary = library;
 
             item = document.createElement('div'); 
             bookTitle = document.createElement('h4'); 
@@ -66,7 +65,7 @@ function showLib() {
             removeName = document.querySelector(`#${theLibrary[i].title}`);
 
             
-            bookTitle.textContent = `'${theLibrary[i].title}'` 
+            bookTitle.textContent =  `${theLibrary[i].title}`
             bookAuthor.textContent = `by ${theLibrary[i].author}`
             bookPages.textContent = `${theLibrary[i].pages} pages` 
     
@@ -124,6 +123,7 @@ const cooking = new Book(
 )
 
 
+
 // creates a new book object
 const createBook = () => {
     const title = document.getElementById('title').value;
@@ -142,6 +142,9 @@ const addBook = (e) => {
 
     newBook = `${newBook.title}`;
     console.log(newBook);
+
+    localStorage.setItem('library', JSON.stringify(theLibrary));
+
     
     newBookForm.style.display = 'none';
 
@@ -223,6 +226,8 @@ createBookButton.addEventListener('click', addBook);
 //cruggus.addToLib();
 //ether.addToLib();
 //cooking.addToLib();
+
+window.localStorage;
 showLib();
 console.table(theLibrary);
 
