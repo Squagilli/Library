@@ -103,7 +103,7 @@ function showLib() {
                 localStorage.setItem('library', JSON.stringify(library));
 
                 console.log(localStorage)
-
+                
 
                 
                 deleteThis.remove();
@@ -160,6 +160,9 @@ const addBook = (e) => {
    
     
     newBookForm.style.display = 'none';
+
+
+    window.location.reload(true);
 
     
 }
