@@ -118,12 +118,12 @@ function showLib() {
 
 // Example books
 const cruggus = new Book(
-    'Cruggus',
-    'The Crug',
-    '987',
+    'Example',
+    'Example',
+    '0',
     true,
 )
-const ether = new Book(
+/*const ether = new Book(
     'The Ether',
     'Kromgar',
     '1152',
@@ -134,7 +134,7 @@ const cooking = new Book(
     'Ogmar',
     '55',
     false,
-)
+)*/
 
 
 

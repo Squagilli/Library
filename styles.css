@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Hahmlet:wght@200&display=swap');
+
+html {
+  font-family: 'Hahmlet', serif;
+  background-color: #d9ad7c
+}
+
 /* The Modal (background) */
 .form-container {
     display: none; /* Hidden by default */
@@ -14,18 +21,21 @@
   
   /* Modal Content/Box */
   .form-content {
-    background-color: #fefefe;
+    background-color: #a2836e;
+    color: #fff2df;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
+    padding: 1em;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
+    height: 25em;
+    font-size: 50px;
   }
   
   /* The Close Button */
   .close {
-    color: #aaa;
+    color: #e0876a;
     float: right;
-    font-size: 28px;
+    font-size: 58px;
     font-weight: bold;
   }
   
@@ -36,11 +46,30 @@
     cursor: pointer;
   }
 
+.book-info {
+  display: flex;
+  flex-flow: column nowrap;
+  padding: 0.5em;
+  align-items: center;
+  justify-content: space-between;
+}
+label {
+  padding: 0.4em;
+}
+input {
+  width: 22em;
+  height: 3em;
+  padding: 0.5em;
+}
+
+.create-book {
+  font-size: 25px;
+}
+
 .library-container {
     display: flex;
     flex-flow: row wrap;
     padding: 2em;
-    border: 1px solid black;
     justify-content: space-evenly;
     text-align: center;
     font-size: 40px;
@@ -48,12 +77,18 @@
     align-items: center;
 }
 .item {
-    border: 1px solid black;
+    border: 3px solid #674d3c;
     align-self: center;
     padding: 2em;
     margin: 1em;
 
+    background-color:  #fff2df;
+
+    color: #674d3c;
+
     text-align: center;
+
+    max-width: 95%;
 
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
@@ -61,3 +96,59 @@
 .item:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   }
+
+/*HTML MAIN SCREEN*/
+
+.new-book {
+  font-size: 50px;
+  margin-bottom: 0.5em;
+  padding: 0.3em;
+  color: #e0876a;
+  font-family: 'Hahmlet', serif;
+  align-self: center;
+  
+  background-color: #fbefcc;
+  border: 4px double #fbefcc;
+  text-align: center;
+  border-radius: 10px;
+}
+.new-book-area {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.library-title {
+  text-align: center;
+  font-size: 85px;
+  color: #fbefcc;
+}
+.removeBtn {
+  font-size: 40px;
+  padding: 0.3em;
+  color: #fbefcc;
+  font-family: 'Hahmlet', serif;
+  
+  display: inline-block;
+  background-color: #e0876a;
+  border: 4px double #e0876a;
+  text-align: center;
+  border-radius: 10px;
+
+}
+.create-book {
+  font-size: 40px;
+  padding: 0.3em;
+  color:  #674d3c;
+  font-family: 'Hahmlet', serif;
+
+  max-width: 10em;
+  
+  display: inline-block;
+  background-color:  #fbefcc;
+  border: 4px double #e0876a;
+  text-align: center;
+  border-radius: 10px;
+
+}
+

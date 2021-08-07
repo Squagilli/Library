@@ -4,9 +4,12 @@
         <link rel='stylesheet' href='styles.css'>
     </head>
     <body>
-        <button class='new-book'>
-            New Book
-        </button>
+        <h1 class='library-title'>The Library</h1>
+        <div class='new-book-area'>
+            <button class='new-book'>
+                New Book
+            </button>
+        </div>
         <div class='form-container'>
             <div class='form-content'>
                 <span class='close'>&times;</span>
@@ -15,9 +18,9 @@
                     <input type='text' id='title' name='title'><br>
                     <label for='author'>Author: </label>
                     <input type='text' id='author' name='author'><br>
-                    <label for='pages'>Number of Pages: </label>
+                    <label for='pages'># of Pages: </label>
                     <input type='text' id='pages' name='pages'><br>
-                    <label for='read'>I have read this book </label>
+                    <label for='read'>Read? </label>
                     <input type='checkbox' id='read' name='read'><br>
                     <input class='create-book' type='submit' value='Submit Book'>
                 </form>
@@ -28,4 +31,5 @@
         </div>
         <script src='scripts.js'></script>
     </body>
+    <footer>By Squagilli</footer>
 </html>
