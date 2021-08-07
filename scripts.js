@@ -18,13 +18,16 @@ function Book(title, author, pages, read) {
     this.author = author
     this.pages = pages
     this.read = read
-    this.addToLib();
+    if (theLibrary !== null) {
+        this.addToLib();
+    }
+    
     
 }
 
 // Adds book to library
 Book.prototype.addToLib = function() {
-    if (theLibrary) {
+    if (theLibrary !== null) {
         
     theLibrary.push(this);
     }
@@ -55,7 +58,7 @@ function showLib() {
     if (!theLibrary) {
         alert('Please add a new book!')
     }
-    else if (theLibrary) {
+    else if (theLibrary !== null) {
     for (let i = 0; i < theLibrary.length; i++) {
 
             
