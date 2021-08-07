@@ -25,6 +25,7 @@ function Book(title, author, pages, read) {
 // Adds book to library
 Book.prototype.addToLib = function() {
     theLibrary.push(this);
+   
 }
 
 // Adds book to local storage
@@ -35,6 +36,8 @@ function removeBook(goneBook) {
     const newLib = theLibrary.filter(book => book.title !== goneBook.id);
     theLibrary = newLib;
     console.table(theLibrary);
+
+
 }
 
 
@@ -43,10 +46,16 @@ function removeBook(goneBook) {
 // Displays the library on cards
 function showLib() {
     for (let i = 0; i < theLibrary.length; i++) {
+            
+            if (localStorage.length > 0) {
+                let library = JSON.parse(localStorage.getItem('library'));
+                //console.log(library);
 
+                theLibrary = library;
 
-            //let library = JSON.parse(localStorage.getItem('library'));
-            //theLibrary = library;
+            }
+            
+
             
 
             item = document.createElement('div'); 
@@ -90,6 +99,16 @@ function showLib() {
                 toggleRemove.onclick = function(e) {
                 console.log(e.target.parentNode);
                 deleteThis = e.target.parentNode;
+
+                for (i = 0; i < theLibrary.length; i++) {
+                    let library = JSON.parse(localStorage.getItem('library'));
+                    console.log(library[i]);
+                    let newLibrary = library.splice(i, 1);
+                    localStorage.setItem('remove', JSON.stringify(newLibrary));
+
+                    localStorage.removeItem(newLibrary);
+
+                }
 
                 
                 deleteThis.remove();
@@ -144,7 +163,6 @@ const addBook = (e) => {
     console.log(newBook);
 
     localStorage.setItem('library', JSON.stringify(theLibrary));
-
     
     newBookForm.style.display = 'none';
 
@@ -167,8 +185,13 @@ function updateLibrary(newBook) {
         item.setAttribute('id', `${newBook.title}`);
 
         bookTitle.textContent = `'${newBook.title}'`
+        
+
         bookAuthor.textContent = `by ${newBook.author}`
+        
+
         bookPages.textContent = `${newBook.pages} pages`
+        
 
             if (newBook.read === true) {
                 bookRead.textContent = 'Has been read';
@@ -192,6 +215,15 @@ function updateLibrary(newBook) {
 
 
         toggleRemove.onclick = function(e) {
+
+            localStorage.removeItem('library')
+            console.log(theLibrary)
+
+            localStorage.removeItem('newTitle');
+            localStorage.removeItem('newAuthor');
+            localStorage.removeItem('newPages');
+            localStorage.removeItem('newRead');
+
             console.log(e.target);
             deleteThis = e.target.parentNode;
             deleteThis.remove();
@@ -223,7 +255,6 @@ window.onclick = function(e) {
 
 
 createBookButton.addEventListener('click', addBook);
-
 
 window.localStorage;
 showLib();
