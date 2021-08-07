@@ -136,6 +136,18 @@ input {
   border-radius: 10px;
 
 }
+button {
+  font-size: 40px;
+  padding: 0.3em;
+  color: #fbefcc;
+  font-family: 'Hahmlet', serif;
+  
+  display: inline-block;
+  background-color: #e0876a;
+  border: 4px double #e0876a;
+  text-align: center;
+  border-radius: 10px;
+}
 .create-book {
   font-size: 40px;
   padding: 0.3em;
