@@ -37,7 +37,6 @@ function removeBook(goneBook) {
     theLibrary = newLib;
     console.table(theLibrary);
 
-
 }
 
 
@@ -46,17 +45,16 @@ function removeBook(goneBook) {
 // Displays the library on cards
 function showLib() {
     for (let i = 0; i < theLibrary.length; i++) {
+
             
-            if (localStorage.length > 0) {
-                let library = JSON.parse(localStorage.getItem('library'));
-                //console.log(library);
+            
+            let library = JSON.parse(localStorage.getItem('library'));
 
-                theLibrary = library;
-
+            theLibrary = library;
+            
+            if (theLibrary.length < 1) {
+                alert('Please add a new book!')
             }
-            
-
-            
 
             item = document.createElement('div'); 
             bookTitle = document.createElement('h4'); 
@@ -100,15 +98,12 @@ function showLib() {
                 console.log(e.target.parentNode);
                 deleteThis = e.target.parentNode;
 
-                for (i = 0; i < theLibrary.length; i++) {
-                    let library = JSON.parse(localStorage.getItem('library'));
-                    console.log(library[i]);
-                    let newLibrary = library.splice(i, 1);
-                    localStorage.setItem('remove', JSON.stringify(newLibrary));
+                library = theLibrary.filter(book => book.title !== library[i].title);
 
-                    localStorage.removeItem(newLibrary);
+                localStorage.setItem('library', JSON.stringify(library));
 
-                }
+                console.log(localStorage)
+
 
                 
                 deleteThis.remove();
@@ -162,7 +157,7 @@ const addBook = (e) => {
     newBook = `${newBook.title}`;
     console.log(newBook);
 
-    localStorage.setItem('library', JSON.stringify(theLibrary));
+   
     
     newBookForm.style.display = 'none';
 
@@ -171,6 +166,11 @@ const addBook = (e) => {
 
 // updates library display with new book
 function updateLibrary(newBook) {
+
+        localStorage.setItem('library', JSON.stringify(theLibrary));
+        
+
+
         if (newBook.title !== this.title) {
         item = document.createElement('div');
         bookTitle = document.createElement('h4');
@@ -216,13 +216,9 @@ function updateLibrary(newBook) {
 
         toggleRemove.onclick = function(e) {
 
-            localStorage.removeItem('library')
-            console.log(theLibrary)
-
-            localStorage.removeItem('newTitle');
-            localStorage.removeItem('newAuthor');
-            localStorage.removeItem('newPages');
-            localStorage.removeItem('newRead');
+            let library = JSON.parse(localStorage.getItem('library'));
+            library = library.splice(i, 1);
+            localStorage.setItem('library', JSON.stringify(library));
 
             console.log(e.target);
             deleteThis = e.target.parentNode;
