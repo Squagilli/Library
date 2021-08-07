@@ -24,7 +24,10 @@ function Book(title, author, pages, read) {
 
 // Adds book to library
 Book.prototype.addToLib = function() {
+    if (theLibrary) {
+        
     theLibrary.push(this);
+    }
    
 }
 
@@ -44,74 +47,74 @@ function removeBook(goneBook) {
 
 // Displays the library on cards
 function showLib() {
+
+    let library = JSON.parse(localStorage.getItem('library'));
+
+    theLibrary = library;
+
+    if (!theLibrary) {
+        alert('Please add a new book!')
+    }
+    else if (theLibrary) {
     for (let i = 0; i < theLibrary.length; i++) {
 
             
-            
-            let library = JSON.parse(localStorage.getItem('library'));
 
-            theLibrary = library;
-            
-            if (theLibrary.length < 1) {
-                alert('Please add a new book!')
-            }
 
-            item = document.createElement('div'); 
-            bookTitle = document.createElement('h4'); 
-            bookAuthor = document.createElement('h4'); 
-            bookPages = document.createElement('h4'); 
-            bookRead = document.createElement('h4'); 
-            toggleRemove = document.createElement('button');
-            
-            item.classList.add('item');
-            
-            // add id's to items and buttons to associate with DOM
-            toggleRemove.setAttribute('id', `${theLibrary[i].title}`);
-            toggleRemove.classList.add('removeBtn');
-            item.setAttribute('id', `${theLibrary[i].title}`);
-            removeName = document.querySelector(`#${theLibrary[i].title}`);
+                item = document.createElement('div'); 
+                bookTitle = document.createElement('h4'); 
+                bookAuthor = document.createElement('h4'); 
+                bookPages = document.createElement('h4'); 
+                bookRead = document.createElement('h4'); 
+                toggleRemove = document.createElement('button');
+                
+                item.classList.add('item');
+                
+                // add id's to items and buttons to associate with DOM
+                toggleRemove.setAttribute('id', `${theLibrary[i].title}`);
+                toggleRemove.classList.add('removeBtn');
+                item.setAttribute('id', `${theLibrary[i].title}`);
+                removeName = document.querySelector(`#${theLibrary[i].title}`);
 
-            
-            bookTitle.textContent =  `${theLibrary[i].title}`
-            bookAuthor.textContent = `by ${theLibrary[i].author}`
-            bookPages.textContent = `${theLibrary[i].pages} pages` 
-    
-                if (theLibrary[i].read === true) {
-                    bookRead.textContent = 'Has been read';
+                
+                bookTitle.textContent =  `${theLibrary[i].title}`
+                bookAuthor.textContent = `by ${theLibrary[i].author}`
+                bookPages.textContent = `${theLibrary[i].pages} pages` 
+        
+                    if (theLibrary[i].read === true) {
+                        bookRead.textContent = 'Has been read';
+                    }
+                    else {
+                        bookRead.textContent = 'Has not been read';
+                    }
+
+                toggleRemove.textContent = 'Remove Book';
+                
+                    item.appendChild(bookTitle); 
+                    item.appendChild(bookAuthor); 
+                    item.appendChild(bookPages);
+                    item.appendChild(bookRead); 
+                    item.appendChild(toggleRemove);
+
+                    libContainer.append(item); 
+
+                    
+                    toggleRemove.onclick = function(e) {
+                    console.log(e.target.parentNode);
+                    deleteThis = e.target.parentNode;
+
+                    library = theLibrary.filter(book => book.title !== library[i].title);
+
+                    localStorage.setItem('library', JSON.stringify(library));
+
+                    console.log(localStorage)
+                    
+
+                    
+                    deleteThis.remove();
+                    removeBook(deleteThis);
+                    }
                 }
-                else {
-                    bookRead.textContent = 'Has not been read';
-                }
-
-            toggleRemove.textContent = 'Remove Book';
-            
-                item.appendChild(bookTitle); 
-                item.appendChild(bookAuthor); 
-                item.appendChild(bookPages);
-                item.appendChild(bookRead); 
-                item.appendChild(toggleRemove);
-
-                libContainer.append(item); 
-
-                
-                toggleRemove.onclick = function(e) {
-                console.log(e.target.parentNode);
-                deleteThis = e.target.parentNode;
-
-                library = theLibrary.filter(book => book.title !== library[i].title);
-
-                localStorage.setItem('library', JSON.stringify(library));
-
-                console.log(localStorage)
-                
-
-                
-                deleteThis.remove();
-                removeBook(deleteThis);
-                }
-
-
-                
     }
 }
 
@@ -162,7 +165,7 @@ const addBook = (e) => {
     newBookForm.style.display = 'none';
 
 
-    window.location.reload(true);
+    //window.location.reload(true);
 
     
 }
